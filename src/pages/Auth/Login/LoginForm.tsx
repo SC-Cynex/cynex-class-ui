@@ -2,6 +2,7 @@ import React from 'react';
 import type { FormProps } from 'antd';
 import { Button, Form, Input } from 'antd';
 import { FaLock, FaUserAlt } from "react-icons/fa";
+import styles from "./LoginForm.module.css";
 
 type FieldType = {
     username: string;
@@ -42,6 +43,12 @@ const LoginForm: React.FC = () => (
             <Button type="primary" size='large' htmlType="submit" block>
                 Entrar
             </Button>
+            <a 
+                className={styles.reset}
+                href='/reset-password'
+            >
+                Esqueceu sua senha?
+            </a>
         </Form.Item>
     </Form>
 );

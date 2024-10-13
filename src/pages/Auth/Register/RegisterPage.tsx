@@ -1,10 +1,15 @@
 import React from "react";
+import DefaultFrame from "../../../components/Defaultframe/Defaultframe";
+import RegisterForm from "./RegisterForm";
+import styles from "./RegisterPage.module.css";
 
 const RegisterPage: React.FC = () => {
     return (
-        <div>
-            <h1>Register</h1>
-        </div>
+        <DefaultFrame title="Registrar Usuário">
+            <div className={styles.register}>
+                <RegisterForm/>
+            </div>
+        </DefaultFrame>
     );
 };
 
