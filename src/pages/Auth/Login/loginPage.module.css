@@ -1,0 +1,57 @@
+@import url(../../../index.css);
+@import url('https://fonts.googleapis.com/css2?family=Sofia+Sans+Semi+Condensed:ital,wght@0,1..1000;1,1..1000&display=swap');
+
+.container {
+    display: flex;
+    height: 100vh;
+    background-color: var(--background-color);
+}
+
+.sectionLogin {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.sectionLogin h1 {
+    font-size: 36px;
+    font-family: "Sofia Sans Semi Condensed", sans-serif;
+    margin-bottom: 40px;
+}
+
+
+.divider {
+    border: solid 0.5px black;
+}
+
+.sectionWelcome {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.slogan {
+    text-align: center;
+    margin: 0px 100px 100px;
+}
+
+.slogan p {
+    font-family: "Sofia Sans Semi Condensed", sans-serif;
+    letter-spacing: 2px;
+    font-size: 30px;
+}
+
+.textLogin {
+    text-align: center;
+    margin: 0px 100px 100px;
+}
+
+.textLogin p {
+    font-family: "Sofia Sans Semi Condensed", sans-serif;
+    letter-spacing: 2px;
+    font-size: 18px;
+}
