@@ -9,8 +9,9 @@ const App: React.FC = () => {
       theme={{
         token: {
           colorPrimary: '#6D0A0A',
-          colorBgContainer: '#F3F3F3',
-          colorBorder: 'transparent',
+          colorBgContainer: 'none',
+          colorBorder: 'none',
+          colorBgBase: '#F3F3F3',
           borderRadius: 50
         },
         components: {

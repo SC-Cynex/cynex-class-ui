@@ -15,3 +15,9 @@
     align-items: center;
     margin: 15px;
 }
+
+.formTitle h2 {
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+}
