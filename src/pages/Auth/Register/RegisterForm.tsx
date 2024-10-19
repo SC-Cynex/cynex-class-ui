@@ -53,16 +53,7 @@ export default function RegisterForm() {
     };
 
     return (
-        <ConfigProvider
-            theme={{
-                token: {
-                    colorPrimary: '#6D0A0A',
-                    colorBgContainer: '#F3F3F3',
-                    colorBorder: 'transparent',
-                    borderRadius: 50
-                },
-            }}
-        >
+        
             <Form
                 form={form}
                 layout='vertical'
@@ -207,6 +198,5 @@ export default function RegisterForm() {
                     <Button type="primary" htmlType="submit" block size="large">Registrar</Button>
                 </Form.Item>
             </Form>
-        </ConfigProvider>
     );
 }

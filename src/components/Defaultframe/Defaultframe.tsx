@@ -15,7 +15,7 @@ export default function DefaultFrame({ children, title }: DefaultFrameProps): JS
             <SiderPage />
             <Layout>
                 <HeaderPage />
-                <Layout style={{ marginTop: '104px', marginLeft: '120px' }}>
+                <Layout style={{ marginTop: '104px', marginLeft: '120px', marginRight: '80px' }}>
                     {title && <h1 className={styles.title}>{title}</h1>}
                     {children}
                 </Layout>

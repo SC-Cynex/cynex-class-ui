@@ -9,6 +9,7 @@ import ClassPage from "../pages/Class/ClassPage";
 import SettingPage from "../pages/Setting/SettingPage";
 import ResetPasswordPage from "../pages/Auth/ResetPassword/ResetPasswordPage";
 import NotFoundPage from "../pages/NotFound/NotFoundPage";
+import Home from "../pages/Home/Home";
 
 interface RouteType {
   path: string;
@@ -23,25 +24,11 @@ const routes: RouteType[] = [
   { path: "/timetable", component: TimeTablePage },
   { path: "/registration", component: RegistrationPage },
   { path: "/class", component: ClassPage },
-  { path: "/setting", component: SettingPage }
+  { path: "/setting", component: SettingPage },
+  { path: "/", component: Home }
 ];
 
 const AuthRoutes: React.FC = () => {
-  const RedirectToAppropriatePage: React.FC = () => {
-    const navigate = useNavigate();
-    const [isAuthenticated, setIsAuthenticated] = useState(null);
-
-    useEffect(() => {
-      if (isAuthenticated) {
-        navigate('/portal');
-      } else {
-        navigate('/login');
-      }
-    }, [isAuthenticated, navigate]);
-
-    return null;
-  }
-
   return (
     <Routes>
       {routes.map((route, key) => (
@@ -51,7 +38,6 @@ const AuthRoutes: React.FC = () => {
           element={<route.component />}
         />
       ))}
-      <Route path="/" element={<RedirectToAppropriatePage />} />
       <Route path="*" element={<NotFoundPage />} />
     </Routes>
   );

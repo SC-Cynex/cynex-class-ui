@@ -1,0 +1,11 @@
+.carouselGroup {
+    display: flex;
+}
+
+.card {
+    text-align: center;
+}
+
+.button {
+    margin-top: 10px;
+}
