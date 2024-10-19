@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {  FaUsers, FaUserPlus } from "react-icons/fa";
-import { FaRegCalendarPlus, FaGear, FaLaptop } from "react-icons/fa6";
+import { FaRegCalendarPlus, FaGear, FaLaptop, FaUsers as FaClass } from "react-icons/fa6";
 import { FiMenu } from "react-icons/fi";
 import { Layout, Menu, Button, Divider } from "antd";
 import type { MenuProps } from "antd";
@@ -29,7 +29,7 @@ const items: MenuItem[] = [
     getItem("Portal", "/portal", <FaLaptop/>),
     getItem("Quadro de Horários", "/timetable", <FaRegCalendarPlus/>),
     getItem("Inscrição", "/registration", <FaUserPlus/>),
-    getItem("Turmas", "/class", <FaUsers/>),
+    getItem("Turmas", "/class", <FaClass/>),
     getItem("Registro de Usuário", "/register", <FaUsers/>),
     getItem("Configurações", "/setting", <FaGear/>)
 ];

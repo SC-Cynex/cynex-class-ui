@@ -1,0 +1,10 @@
+.courseSection {
+    margin: 0px 100px;
+}
+
+.courseTitle {
+    text-align: left;
+    margin-bottom: 20px;
+    color: #a30000;
+    font-size: 2rem;
+}

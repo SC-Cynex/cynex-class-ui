@@ -10,7 +10,6 @@ const App: React.FC = () => {
         token: {
           colorPrimary: '#6D0A0A',
           colorBgContainer: 'none',
-          colorBorder: 'none',
           colorBgBase: '#F3F3F3',
           borderRadius: 50
         },
@@ -22,7 +21,8 @@ const App: React.FC = () => {
           },
           Menu: {
             darkItemBg: '#6D0A0A',
-            darkItemSelectedBg: 'rgba(0, 0, 0, 0.6)'
+            darkItemSelectedBg: 'rgba(0, 0, 0, 0.6)',
+            darkSubMenuItemBg: '#6D0A0A'
           }
         },
       }}
