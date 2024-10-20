@@ -15,8 +15,6 @@ const user: MenuProps['items'] = [
             </div>
         ),
         onClick: () => {
-            document.cookie = `token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
-            localStorage.removeItem('id');
             window.location.href = '/login';
         },
     },
