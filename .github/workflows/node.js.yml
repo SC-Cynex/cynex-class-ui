@@ -1,6 +1,3 @@
-# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
-
 name: Node.js CI
 
 on:
@@ -17,7 +14,6 @@ jobs:
     strategy:
       matrix:
         node-version: [18.x, 20.x, 22.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
     - uses: actions/checkout@v4
@@ -28,3 +24,22 @@ jobs:
         cache: 'npm'
     - run: npm ci
     - run: npm run build --if-present
+
+    # Aprovar automaticamente o pull request se o build foi bem-sucedido
+    - name: Approve Pull Request
+      if: success()
+      run: |
+        PR_NUMBER=$(echo ${{ github.event.pull_request.number }})
+        REPO=$(echo ${{ github.repository }})
+
+        # Aprova o Pull Request
+        curl -X POST -H "Authorization: token ${{ secrets.ACTIONS_BOT }}" \
+        -H "Content-Type: application/json" \
+        -d '{"event": "APPROVE"}' \
+        "https://api.github.com/repos/${REPO}/pulls/${PR_NUMBER}/reviews"
+
+        # Adiciona um comentário no Pull Request
+        curl -X POST -H "Authorization: token ${{ secrets.ACTIONS_BOT }}" \
+        -H "Content-Type: application/json" \
+        -d '{"body": "O build foi bem-sucedido! O PR foi aprovado automaticamente."}' \
+        "https://api.github.com/repos/${REPO}/issues/${PR_NUMBER}/comments"
