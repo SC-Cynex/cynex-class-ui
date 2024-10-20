@@ -3,7 +3,6 @@ import { Form, Button, Input, Select, Col, Row } from "antd";
 import styles from "./RegisterForm.module.css";
 import { FaUserAlt, FaMapMarkerAlt } from "react-icons/fa";
 import action from './action';
-import { ConfigProvider } from "antd";
 
 interface AddressData {
     city: string;
