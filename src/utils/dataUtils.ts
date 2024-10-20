@@ -1,4 +1,4 @@
-export const formatDate = (fixedDate?: Date): string => {
+export const formatDate = (_fixedDate?: Date): string => {
     const date = new Date();
     const months = [
         'janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho',
