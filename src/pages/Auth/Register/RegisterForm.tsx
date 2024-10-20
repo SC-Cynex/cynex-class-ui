@@ -47,7 +47,7 @@ export default function RegisterForm() {
         }
     };
 
-    const handleRegister = async (values: RegisterValues) => {
+    const handleRegister = async (_values: RegisterValues) => {
         // Lógica para registrar o usuário
     };
 

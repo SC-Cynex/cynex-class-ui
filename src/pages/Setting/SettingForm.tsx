@@ -28,7 +28,7 @@ export default function SettingForm() {
         setIsEditing(false);
     };
 
-    const handleSave = (values: FormValues) => {
+    const handleSave = (_values: FormValues) => {
         setIsEditing(false);
     };
 
