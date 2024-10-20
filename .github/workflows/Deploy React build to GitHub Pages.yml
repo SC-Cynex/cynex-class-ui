@@ -16,7 +16,7 @@ jobs:
       - name: Build static files
         id: build
         run: |
-          npm install --if-present
+          npm install
           npm run build --output-hashing=none
 
       - name: Upload static files as artifact
