@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {  FaUsers, FaUserPlus } from "react-icons/fa";
-import { FaRegCalendarPlus, FaGear, FaLaptop, FaUsers as FaClass } from "react-icons/fa6";
+import { FaRegCalendarPlus, FaGear, FaLaptop, FaUsers as FaClass, FaUser, FaBook } from "react-icons/fa6";
 import { FiMenu } from "react-icons/fi";
 import { Layout, Menu, Button, Divider } from "antd";
 import type { MenuProps } from "antd";
@@ -25,15 +25,6 @@ function getItem(
     } as MenuItem;
 }
 
-const items: MenuItem[] = [
-    getItem("Portal", "/portal", <FaLaptop/>),
-    getItem("Quadro de Horários", "/timetable", <FaRegCalendarPlus/>),
-    getItem("Inscrição", "/registration", <FaUserPlus/>),
-    getItem("Turmas", "/class", <FaClass/>),
-    getItem("Registro de Usuário", "/register", <FaUsers/>),
-    getItem("Configurações", "/setting", <FaGear/>)
-];
-
 const SiderPage: React.FC = () => {
     const [collapsed, setCollapsed] = useState<boolean>(true);
     const navigate = useNavigate();
@@ -41,6 +32,18 @@ const SiderPage: React.FC = () => {
     const handleMenuClick = (key: string) => {
         navigate(key);
     };
+
+    const items: MenuItem[] = [
+        getItem("Portal", "/portal", <FaLaptop/>),
+        getItem("Quadro de Horários", "/timetable", <FaRegCalendarPlus/>),
+        getItem("Inscrição", "/registration", <FaUserPlus/>),
+        getItem("Turmas", "/class", <FaClass/>),
+        getItem("Registrar", "/register", <FaUsers/>, [
+            getItem(collapsed ? "Registrar Usuário" : "Usuário", "/register/user", <FaUser/>),
+            getItem(collapsed ? "Registrar Aula" :"Aula", "/register/class",<FaBook/>),    
+        ]),
+        getItem("Configurações", "/setting", <FaGear/>)
+    ];
 
     return (
         <Sider
@@ -66,7 +69,7 @@ const SiderPage: React.FC = () => {
             <Menu
                 onClick={({ key }) => handleMenuClick(key as string)}
                 defaultSelectedKeys={[window.location.pathname]}
-                mode="vertical"
+                mode="inline"
                 items={items}
                 theme={"dark"}
             />

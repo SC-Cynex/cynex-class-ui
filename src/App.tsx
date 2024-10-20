@@ -22,7 +22,8 @@ const App: React.FC = () => {
           Menu: {
             darkItemBg: '#6D0A0A',
             darkItemSelectedBg: 'rgba(0, 0, 0, 0.6)',
-            darkSubMenuItemBg: '#6D0A0A'
+            darkSubMenuItemBg: '#6D0A0A',
+            darkPopupBg: '#6D0A0A'
           }
         },
       }}

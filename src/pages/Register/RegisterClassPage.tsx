@@ -1,7 +1,7 @@
 import React from "react";
 import DefaultFrame from "../../components/Defaultframe/Defaultframe";
-import { FaUserPlus } from "react-icons/fa6";
 import { Breadcrumb } from "antd";
+import { FaBook } from "react-icons/fa6";
 
 const BreadcrumbComponent: React.FC = () => {
     return (
@@ -9,20 +9,23 @@ const BreadcrumbComponent: React.FC = () => {
             items={[
                 {
                     href: '',
-                    title: <FaUserPlus/>,
+                    title: <FaBook/>,
                 },
                 {
                     href: '',
-                    title: 'Inscrição',
-                }
+                    title: 'Registrar',
+                },
+                {
+                    title: 'Usuário',
+                },
             ]}
         />
     );
 };
 
-const RegistrationPage: React.FC = () => {
+const RegisterClassPage: React.FC = () => {
     return (
-        <DefaultFrame title="Inscrição" breadcrumb={<BreadcrumbComponent/>}>
+        <DefaultFrame title="Registrar Aula"  breadcrumb={<BreadcrumbComponent/>}>
             <div>
                 
             </div>
@@ -30,4 +33,4 @@ const RegistrationPage: React.FC = () => {
     );
 };
 
-export default RegistrationPage
+export default RegisterClassPage

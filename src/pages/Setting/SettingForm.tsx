@@ -107,9 +107,9 @@ export default function SettingForm() {
             <Row align="middle" gutter={20}>
                 <Col span={12}>
                     <Form.Item
-                        name="city"
-                        label="Cidade"
-                        rules={[{ required: true, message: 'Preencha o campo de cidade!' }]}
+                        name="zipCode"
+                        label="CEP"
+                        rules={[{ required: true, min: 8, message: 'Preencha o campo de CEP!' }]}
                         hasFeedback
                     >
                         <Input size="large" disabled={!isEditing} />
@@ -129,9 +129,9 @@ export default function SettingForm() {
             <Row align="middle" gutter={20}>
                 <Col span={12}>
                     <Form.Item
-                        name="zipCode"
-                        label="CEP"
-                        rules={[{ required: true, min: 8, message: 'Preencha o campo de CEP!' }]}
+                        name="city"
+                        label="Cidade"
+                        rules={[{ required: true, message: 'Preencha o campo de cidade!' }]}
                         hasFeedback
                     >
                         <Input size="large" disabled={!isEditing} />
