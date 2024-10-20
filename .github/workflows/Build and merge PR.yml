@@ -25,6 +25,7 @@ jobs:
     - run: npm run build --if-present
 
   approve-pr:
+    needs: build
     if: github.event_name == 'pull_request' && success()
     runs-on: ubuntu-latest
     steps:
@@ -45,6 +46,7 @@ jobs:
         "https://api.github.com/repos/${REPO}/pulls/${PR_NUMBER}/reviews"
 
   merge-pr:
+    needs: approve-pr
     if: github.event_name == 'pull_request' && success()
     runs-on: ubuntu-latest
     steps:
@@ -59,6 +61,7 @@ jobs:
         "https://api.github.com/repos/${REPO}/pulls/${PR_NUMBER}/merge"
 
   delete-branch:
+    needs: merge-pr
     if: github.event_name == 'pull_request' && success()
     runs-on: ubuntu-latest
     steps:
