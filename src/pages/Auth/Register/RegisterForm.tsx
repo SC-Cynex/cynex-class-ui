@@ -49,6 +49,7 @@ export default function RegisterForm() {
 
     const handleRegister = async (_values: RegisterValues) => {
         // Lógica para registrar o usuário
+        // Teste
     };
 
     return (
