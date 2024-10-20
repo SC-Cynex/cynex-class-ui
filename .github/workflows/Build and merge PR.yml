@@ -39,7 +39,6 @@ jobs:
         -d '{"body": "O build foi bem-sucedido! O PR foi aprovado automaticamente."}' \
         "https://api.github.com/repos/${REPO}/issues/${PR_NUMBER}/comments"
 
-        # Aprova o Pull Request
         curl -X POST -H "Authorization: token ${{ secrets.ACTIONS_BOT }}" \
         -H "Content-Type: application/json" \
         -d '{"event": "APPROVE"}' \
@@ -54,8 +53,19 @@ jobs:
         PR_NUMBER=$(echo ${{ github.event.pull_request.number }})
         REPO=$(echo ${{ github.repository }})
 
-        # Realiza o merge automaticamente
         curl -X PUT -H "Authorization: token ${{ secrets.ACTIONS_BOT }}" \
         -H "Content-Type: application/json" \
         -d '{"commit_title": "Merge pull request #'"$PR_NUMBER"'", "merge_method": "squash"}' \
         "https://api.github.com/repos/${REPO}/pulls/${PR_NUMBER}/merge"
+
+  delete-branch:
+    if: github.event_name == 'pull_request' && success()
+    runs-on: ubuntu-latest
+    steps:
+    - name: Delete Branch After Merge
+      run: |
+        BRANCH=$(echo ${{ github.event.pull_request.head.ref }})
+        REPO=$(echo ${{ github.repository }})
+
+        curl -X DELETE -H "Authorization: token ${{ secrets.ACTIONS_BOT }}" \
+        "https://api.github.com/repos/${REPO}/git/refs/heads/${BRANCH}"
