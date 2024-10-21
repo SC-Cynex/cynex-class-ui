@@ -16,7 +16,7 @@ const BreadcrumbComponent: React.FC = () => {
                     title: 'Registrar',
                 },
                 {
-                    title: 'Usuário',
+                    title: 'Aula',
                 },
             ]}
         />
