@@ -42,40 +42,13 @@ const getScheduleDataForDay = (day: string) => {
 const TimeTablePage: React.FC = () => {
     const [selectedValue, setSelectedValue] = useState<Dayjs | null>(null);
     const [api, contextHolder] = notification.useNotification();
-
-    const openNotification = (newValue: Dayjs, schedule: { subject: string; time: string }[]) => {
-        api.info({
-            message: (
-                <>
-                    Você selecionou a data: <span className={styles.date}>{newValue.format('DD/MM/YYYY')}</span>
-                </>
-            ),
-            description: schedule.length > 0 ? (
-                <ul>
-                    {schedule.map((item) => (
-                        <li key={item.subject}>
-                            {item.subject} ({item.time})
-                        </li>
-                    ))}
-                </ul>
-            ) : (
-                <div>Nenhuma aula para este dia.</div>
-            ),
-            placement: 'bottomRight',
-            duration: 0,
-            onClose: () => setSelectedValue(null)
-        });
-    };
-
+    
     const onSelect = (newValue: Dayjs) => {
         if (selectedValue && newValue.isSame(selectedValue, 'day')) {
             api.destroy();
             setSelectedValue(null);
         } else {
-            const dayOfWeek = newValue.format('dddd');
-            const scheduleData = getScheduleDataForDay(dayOfWeek);
             setSelectedValue(newValue);
-            openNotification(newValue, scheduleData);
         }
     };
 
