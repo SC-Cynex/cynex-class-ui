@@ -24,7 +24,17 @@ Nesta seção, você encontrará a documentação completa do projeto, incluindo
 - **[Requisitos Funcionais](https://github.com/user-attachments/files/17424718/Requisitos_CynexClass.pdf)**
 - **[Casos de Uso](link-para-o-documento)**
 - **[Histórias de Usuário](link-para-o-documento)**
-- **[Modelagem UML](link-para-o-documento)**
+- **Modelagem UML**
+   <details><summary>Ver Mais</summary>
+     
+    ## Modelo Conceitual
+    
+    ![CynexClass_conceitual](https://github.com/user-attachments/assets/9b091d04-dfc2-41db-8e03-b44955651185)
+
+    ## Modelo lógico
+ 
+    ![CynexClass_logico](https://github.com/user-attachments/assets/b479f71f-39db-4bee-b780-dad412982e5c)
+   </details>
 
 ## 👥 Membros da equipe
 
