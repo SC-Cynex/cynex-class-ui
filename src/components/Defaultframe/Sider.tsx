@@ -40,7 +40,7 @@ const SiderPage: React.FC = () => {
         getItem("Turmas", "/class", <FaClass/>),
         getItem("Registrar", "/register", <FaUsers/>, [
             getItem(collapsed ? "Registrar Usuário" : "Usuário", "/register/user", <FaUser/>),
-            getItem(collapsed ? "Registrar Aula" :"Aula", "/register/class",<FaBook/>),    
+            getItem(collapsed ? "Registrar Turma" :"Turma", "/register/class",<FaBook/>),    
         ]),
         getItem("Configurações", "/setting", <FaGear/>)
     ];

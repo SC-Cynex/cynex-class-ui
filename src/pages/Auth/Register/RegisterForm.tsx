@@ -120,6 +120,30 @@ export default function RegisterForm() {
                         </Form.Item>
                     </Col>
                 </Row>
+                <Row> 
+                <Col span={12}>
+                        <Form.Item
+                            name="course"
+                            label="Curso"
+                            rules={[{ required: true, message: 'Selecione o curso!' }]}
+                            hasFeedback
+                        >
+                            <Select
+                                size="large"
+                                options={[
+                                    { label: 'Eng. de Software', value: 1 },
+                                    { label: 'Eng. Eletrônica', value: 2 },
+                                    { label: 'Eng. Mecânica', value: 3 },
+                                    { label: 'Biomedicina', value: 4 },
+                                    { label: 'Pedagogia', value: 5 },
+                                    { label: 'Direito', value: 6 },
+                                    { label: 'Design', value: 7 },
+                                    { label: 'Eng. Química', value: 8 },
+                                ]}
+                            />
+                        </Form.Item>
+                    </Col>
+                </Row>
                 <div className={styles.formTitle}>
                     <FaMapMarkerAlt size={30} />
                     <h2>Endereço</h2>

@@ -1,10 +1,40 @@
-.courseSection {
-    margin: 0px 100px;
+.gridContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 20px;
 }
 
-.courseTitle {
-    text-align: left;
-    margin-bottom: 20px;
-    color: #a30000;
-    font-size: 2rem;
+.gridItem {
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.gridItem:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+.noticeDate {
+    font-size: 14px;
+    color: #888;
+    font-style: italic;
+    margin: 8px 0;
+}
+
+.noticeDescription {
+    font-size: 16px;
+    color: #333;
+    line-height: 1.5;
+}
+
+.noNotices {
+    font-size: 14px;
+    color: #888;
+    font-style: italic;
+    text-align: center;
 }
