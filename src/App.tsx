@@ -24,6 +24,11 @@ const App: React.FC = () => {
             darkItemSelectedBg: 'rgba(0, 0, 0, 0.6)',
             darkSubMenuItemBg: '#6D0A0A',
             darkPopupBg: '#6D0A0A'
+          },
+          Table: {
+            headerBg: '#6D0A0A',
+            headerColor: 'white',
+            rowHoverBg: 'rgba(0, 0, 0, 0.04)'
           }
         },
       }}

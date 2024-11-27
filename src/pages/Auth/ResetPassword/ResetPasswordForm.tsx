@@ -8,11 +8,11 @@ type FieldType = {
 };
 
 const onFinish: FormProps<FieldType>['onFinish'] = () => {
-    // implementar
+    
 };
 
 const onFinishFailed: FormProps<FieldType>['onFinishFailed'] = () => {
-    // implementar
+    
 };
 
 const ResetPasswordForm: React.FC = () => (

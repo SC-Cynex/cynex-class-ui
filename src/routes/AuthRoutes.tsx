@@ -11,23 +11,27 @@ import ResetPasswordPage from "../pages/Auth/ResetPassword/ResetPasswordPage";
 import NotFoundPage from "../pages/NotFound/NotFoundPage";
 import Home from "../pages/Home/Home";
 import RegisterClassPage from "../pages/Register/RegisterClassPage";
+import ProtectedRoute from "./ProtectedRoute";
 
 interface RouteType {
   path: string;
   component: React.FC;
+  isProtected?: boolean;
+  allowedRoles?: number[];
 }
 
 const routes: RouteType[] = [
+  { path: "/", component: Home },
   { path: "/login", component: LoginPage },
-  { path: "/register/user", component: RegisterPage },
-  { path: "/register/class", component: RegisterClassPage },
+  { path: "/register/user", component: RegisterPage, allowedRoles: [3] },
+  { path: "/register/class", component: RegisterClassPage, allowedRoles: [3] },
   { path: "/reset-password", component: ResetPasswordPage },
-  { path: "/portal", component: PortalPage },
-  { path: "/timetable", component: TimeTablePage },
-  { path: "/registration", component: RegistrationPage },
-  { path: "/class", component: ClassPage },
-  { path: "/setting", component: SettingPage },
-  { path: "/", component: Home }
+
+  { path: "/portal", component: PortalPage, isProtected: true, allowedRoles: [1, 2, 3] },
+  { path: "/timetable", component: TimeTablePage, isProtected: true, allowedRoles: [2, 3] },
+  { path: "/registration", component: RegistrationPage, isProtected: true, allowedRoles: [2, 3] },
+  { path: "/class", component: ClassPage, isProtected: true, allowedRoles: [1, 3] },
+  { path: "/setting", component: SettingPage, isProtected: true, allowedRoles: [1, 2, 3] }
 ];
 
 const AuthRoutes: React.FC = () => {
@@ -37,12 +41,21 @@ const AuthRoutes: React.FC = () => {
         <Route
           key={key}
           path={route.path}
-          element={<route.component />}
+          element={
+            route.isProtected ? (
+              <ProtectedRoute
+                component={route.component}
+                allowedRoles={route.allowedRoles || []}
+              />
+            ) : (
+              <route.component />
+            )
+          }
         />
       ))}
       <Route path="*" element={<NotFoundPage />} />
     </Routes>
   );
-}
+};
 
-export default AuthRoutes
+export default AuthRoutes;

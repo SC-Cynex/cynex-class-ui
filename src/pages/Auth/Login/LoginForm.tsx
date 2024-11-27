@@ -1,35 +1,26 @@
 import React from 'react';
-import type { FormProps } from 'antd';
 import { Button, Form, Input } from 'antd';
 import { FaLock, FaUserAlt } from "react-icons/fa";
 import styles from "./LoginForm.module.css";
+import actions from './actionLogin';
 
 type FieldType = {
-    username: string;
+    email: string;
     password: string;
-};
-
-const onFinish: FormProps<FieldType>['onFinish'] = () => {
-    // implementar
-};
-
-const onFinishFailed: FormProps<FieldType>['onFinishFailed'] = () => {
-    // implementar
 };
 
 const LoginForm: React.FC = () => (
     <Form
         name="basic"
         initialValues={{ remember: true }}
-        onFinish={onFinish}
-        onFinishFailed={onFinishFailed}
+        onFinish={(values) => actions.signIn(values)}
         autoComplete="off"
     >
         <Form.Item<FieldType>
-            name="username"
-            rules={[{ required: true, message: 'Preencha o campo de usuário.' }]}
+            name="email"
+            rules={[{ required: true, message: 'Preencha o campo de email.' }]}
         >
-            <Input size='large' placeholder='Usuário' prefix={<FaUserAlt style={{ marginRight: 5 }} />} />
+            <Input size='large' placeholder='Email' prefix={<FaUserAlt style={{ marginRight: 5 }} />} />
         </Form.Item>
 
         <Form.Item<FieldType>

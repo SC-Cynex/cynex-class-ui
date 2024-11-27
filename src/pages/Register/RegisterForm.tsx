@@ -1,19 +1,46 @@
 import { Form, Button, Input, Select, Col, Row } from "antd";
 import styles from "./RegisterForm.module.css";
-import { FaChalkboardTeacher} from "react-icons/fa";
+import { FaChalkboardTeacher } from "react-icons/fa";
+import actions from "./actionClass";
+import { useState, useEffect } from "react";
+import subjectsByCourse from "../../utils/subjectsByCourse";
 
 interface RegisterClassValues {
   className: string;
   semester: string;
-  teacher: string;
-  subject: string;
+  teacher: number;
+  subject: number;
+  week: string;
+  course: number;
+  period: string;
 }
 
 export default function RegisterClassForm() {
   const [form] = Form.useForm();
+  const [teachers, setTeachers] = useState([]);
+
+  useEffect(() => {
+    const fetchTeachers = async () => {
+      try {
+        const response = await actions.getTeacher();
+        const teacherData = response.data;
+
+        const formattedTeachers = teacherData.map((teacher: { Username: any; UserID: any; }) => ({
+          label: teacher.Username,
+          value: teacher.UserID,
+        }));
+
+        setTeachers(formattedTeachers);
+      } catch (error) {
+        console.error("Erro ao buscar professores:", error);
+      }
+    };
+
+    fetchTeachers();
+  }, []); 
 
   const handleRegister = async (values: RegisterClassValues) => {
-    console.log(values);
+    await actions.registerClass(values);
   };
 
   return (
@@ -39,15 +66,25 @@ export default function RegisterClassForm() {
           </Form.Item>
         </Col>
         <Col span={12}>
-          <Form.Item
-            name="semester"
-            label="Semestre"
-            rules={[{ required: true, message: "Preencha o semestre!" }]}
-            hasFeedback
-          >
-            <Input size="large" placeholder="Ex: 2024.1" />
-          </Form.Item>
-        </Col>
+  <Form.Item
+    name="semester"
+    label="Semestre"
+    rules={[{ required: true, message: "Preencha o semestre!" }]}
+    hasFeedback
+  >
+    <Select
+      size="large"
+      placeholder="Selecione o Semestre"
+      options={[
+        ...Array.from({ length: 12 }, (_, i) => ({
+          label: `${i + 1}° Semestre`,
+          value: `${i + 1}° Semestre`,
+        })),
+      ]}
+    />
+  </Form.Item>
+</Col>
+
       </Row>
       <Row align="middle" gutter={20}>
         <Col span={12}>
@@ -60,11 +97,7 @@ export default function RegisterClassForm() {
             <Select
               size="large"
               placeholder="Selecione o professor"
-              options={[
-                { label: "Professor 1", value: "professor1" },
-                { label: "Professor 2", value: "professor2" },
-                { label: "Professor 3", value: "professor3" },
-              ]}
+              options={teachers}
             />
           </Form.Item>
         </Col>
@@ -72,17 +105,18 @@ export default function RegisterClassForm() {
           <Form.Item
             name="subject"
             label="Matéria"
-            rules={[{ required: true, message: "Selecione a Matéria!" }]}
+            rules={[
+              {
+                required: true,
+                message: "Selecione a Matéria!",
+              },
+            ]}
             hasFeedback
           >
             <Select
               size="large"
               placeholder="Selecione a Matéria"
-              options={[
-                { label: "Matéria 1", value: "Matéria1" },
-                { label: "Matéria 2", value: "Matéria2" },
-                { label: "Matéria 3", value: "Matéria3" },
-              ]}
+              options={subjectsByCourse}
             />
           </Form.Item>
         </Col>
@@ -99,37 +133,54 @@ export default function RegisterClassForm() {
               size="large"
               placeholder="Selecione o dia da Matéria"
               options={[
-                { label: "Segunda-feira", value: "monday" },
-                { label: "Terça-feira", value: "tuesday" },
-                { label: "Quarta-feira", value: "wednesday" },
-                { label: "Quinta-feira", value: "thursday" },
-                { label: "Sexta-feira", value: "friday" },
+                { label: "Segunda-feira", value: "Segunda-feira" },
+                { label: "Terça-feira", value: "Terça-feira" },
+                { label: "Quarta-feira", value: "Quarta-feira" },
+                { label: "Quinta-feira", value: "Quinta-feira" },
+                { label: "Sexta-feira", value: "Sexta-feira" },
               ]}
             />
           </Form.Item>
         </Col>
         <Col span={12}>
           <Form.Item
-            name="courses"
-            label="Cursos"
-            rules={[
-              { required: true, message: "Selecione pelo menos um curso!" },
-            ]}
+            name="course"
+            label="Curso"
+            rules={[{ required: true, message: "Selecione um curso!" }]}
             hasFeedback
           >
             <Select
-              mode="multiple"
               size="large"
-              placeholder="Selecione os Cursos"
+              placeholder="Selecione o Curso"
               options={[
-                { label: "Eng. de Software", value: 1 },
-                { label: "Eng. Eletrônica", value: 2 },
-                { label: "Eng. Mecânica", value: 3 },
-                { label: "Biomedicina", value: 4 },
-                { label: "Pedagogia", value: 5 },
-                { label: "Direito", value: 6 },
-                { label: "Design", value: 7 },
-                { label: "Eng. Química", value: 8 },
+                { label: "Eng. de Software", value: "Eng. de Software" },
+                { label: "Eng. Eletrônica", value: "Eng. Eletrônica" },
+                { label: "Eng. Mecânica", value: "Eng. Mecânica" },
+                { label: "Biomedicina", value: "Biomedicina" },
+                { label: "Pedagogia", value: "Pedagogia" },
+                { label: "Direito", value: "Direito" },
+                { label: "Design", value: "Design" },
+                { label: "Eng. Química", value: "Eng. Química" },
+              ]}
+            />
+          </Form.Item>
+        </Col>
+      </Row>
+      <Row align="middle" gutter={20}>
+        <Col span={12}>
+          <Form.Item
+            name="period"
+            label="Período"
+            rules={[{ required: true, message: "Selecione o período!" }]}
+            hasFeedback
+          >
+            <Select
+              size="large"
+              placeholder="Selecione o período"
+              options={[
+                { label: "Manhã", value: "Manhã" },
+                { label: "Tarde", value: "Tarde" },
+                { label: "Noite", value: "Noite" },
               ]}
             />
           </Form.Item>

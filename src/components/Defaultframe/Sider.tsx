@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import {  FaUsers, FaUserPlus } from "react-icons/fa";
+import { FaUsers, FaUserPlus } from "react-icons/fa";
 import { FaRegCalendarPlus, FaGear, FaLaptop, FaUsers as FaClass, FaUser, FaBook } from "react-icons/fa6";
 import { FiMenu } from "react-icons/fi";
 import { Layout, Menu, Button, Divider } from "antd";
@@ -28,21 +28,37 @@ function getItem(
 const SiderPage: React.FC = () => {
     const [collapsed, setCollapsed] = useState<boolean>(true);
     const navigate = useNavigate();
+    const userRole = Number(localStorage.getItem("role_id"));
 
     const handleMenuClick = (key: string) => {
         navigate(key);
     };
 
     const items: MenuItem[] = [
-        getItem("Portal", "/portal", <FaLaptop/>),
-        getItem("Quadro de Horários", "/timetable", <FaRegCalendarPlus/>),
-        getItem("Inscrição", "/registration", <FaUserPlus/>),
-        getItem("Turmas", "/class", <FaClass/>),
-        getItem("Registrar", "/register", <FaUsers/>, [
-            getItem(collapsed ? "Registrar Usuário" : "Usuário", "/register/user", <FaUser/>),
-            getItem(collapsed ? "Registrar Turma" :"Turma", "/register/class",<FaBook/>),    
-        ]),
-        getItem("Configurações", "/setting", <FaGear/>)
+        getItem("Portal", "/portal", <FaLaptop />),
+        ...(userRole === 2
+            ? [
+                getItem("Quadro de Horários", "/timetable", <FaRegCalendarPlus />),
+                getItem("Inscrição", "/registration", <FaUserPlus />),
+            ]
+            : []),
+
+        ...(userRole === 1
+            ? [getItem("Turmas", "/class", <FaClass />)]
+            : []),
+
+        ...(userRole === 3
+            ? [
+                getItem("Quadro de Horários", "/timetable", <FaRegCalendarPlus />),
+                getItem("Inscrição", "/registration", <FaUserPlus />),
+                getItem("Turmas", "/class", <FaClass />),
+                getItem("Registrar", "/register", <FaUsers />, [
+                    getItem(collapsed ? "Registrar Usuário" : "Usuário", "/register/user", <FaUser />),
+                    getItem(collapsed ? "Registrar Turma" : "Turma", "/register/class", <FaBook />),
+                ]),
+            ]
+            : []),
+        getItem("Configurações", "/setting", <FaGear />),
     ];
 
     return (

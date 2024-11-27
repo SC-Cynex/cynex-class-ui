@@ -17,7 +17,7 @@ type MenuItem = Required<MenuProps>['items'][number];
 const items: MenuItem[] = [
     {
         label: (
-            <a href="/portal">
+            <a href={localStorage.getItem("token") ? "/portal" : "/login"}>
                 Já sou Aluno
             </a>
         ),
@@ -26,7 +26,7 @@ const items: MenuItem[] = [
     },
     {
         label: (
-            <a href="/registration">
+            <a href={localStorage.getItem("token") ? "/registration" : "/login"}>
                 Inscrever-se em uma turma
             </a>
         ),

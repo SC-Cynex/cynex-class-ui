@@ -1,10 +1,11 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Form, Button, Input, Col, Row, Select } from "antd";
 import { FaMapMarkerAlt, FaUserAlt } from "react-icons/fa";
 import styles from "./SettingForm.module.css";
+import actions from "./actionSettings";
 
 interface FormValues {
-    name: string;
+    username: string;
     email: string;
     user: number;
     password: string;
@@ -19,6 +20,26 @@ interface FormValues {
 export default function SettingForm() {
     const [form] = Form.useForm();
     const [isEditing, setIsEditing] = useState<boolean>(false);
+
+    useEffect(() => {
+        const fetchUserData = async () => {
+            try {
+                const response = await actions.getUser();
+                const userData = response.data;
+
+                form.setFieldsValue({
+                    username: userData.Username,
+                    email: userData.Email,
+                    user: userData.RoleID,
+                    password: userData.Password,
+                });
+            } catch (error) {
+                console.error("Erro ao buscar dados do usuário:", error);
+            }
+        };
+
+        fetchUserData();
+    }, [form]);
 
     const handleEdit = () => {
         setIsEditing(true);
@@ -46,10 +67,9 @@ export default function SettingForm() {
             <Row align="middle" gutter={20}>
                 <Col span={12}>
                     <Form.Item
-                        name="name"
-                        label="Nome"
-                        rules={[{ required: true, message: 'Preencha o campo de nome!' }]}
-                        hasFeedback
+                        name="username"
+                        label="Usuário"
+                        rules={[{ required: true, message: 'Preencha o campo de usuário!' }]}
                     >
                         <Input size="large" disabled={!isEditing} />
                     </Form.Item>
@@ -62,7 +82,6 @@ export default function SettingForm() {
                             { required: true, message: 'Preencha o campo de email!' },
                             { type: "email", message: "Email inválido!" }
                         ]}
-                        hasFeedback
                     >
                         <Input size="large" disabled />
                     </Form.Item>
@@ -72,9 +91,8 @@ export default function SettingForm() {
                 <Col span={12}>
                     <Form.Item
                         name="user"
-                        label="Usuário"
-                        rules={[{ required: true, message: 'Preencha o campo de usuário!' }]}
-                        hasFeedback
+                        label="Tipo de Usuário"
+                        rules={[{ required: true, message: 'Preencha o campo de tipo de usuário!' }]}
                     >
                         <Select
                             size="large"
@@ -94,96 +112,11 @@ export default function SettingForm() {
                             { required: true, message: 'Preencha o campo de senha!' },
                             { min: 6, message: 'A senha deve ter pelo menos 6 caracteres!' }
                         ]}
-                        hasFeedback
                     >
                         <Input.Password size="large" disabled={!isEditing} />
                     </Form.Item>
                 </Col>
             </Row>
-            <div className={styles.formTitle}>
-                <FaMapMarkerAlt size={30} />
-                <h2>Endereço</h2>
-            </div>
-            <Row align="middle" gutter={20}>
-                <Col span={12}>
-                    <Form.Item
-                        name="zipCode"
-                        label="CEP"
-                        rules={[{ required: true, min: 8, message: 'Preencha o campo de CEP!' }]}
-                        hasFeedback
-                    >
-                        <Input size="large" disabled={!isEditing} />
-                    </Form.Item>
-                </Col>
-                <Col span={12}>
-                    <Form.Item
-                        name="state"
-                        label="Estado"
-                        rules={[{ required: true, message: 'Preencha o campo de estado!' }]}
-                        hasFeedback
-                    >
-                        <Input size="large" disabled={!isEditing} />
-                    </Form.Item>
-                </Col>
-            </Row>
-            <Row align="middle" gutter={20}>
-                <Col span={12}>
-                    <Form.Item
-                        name="city"
-                        label="Cidade"
-                        rules={[{ required: true, message: 'Preencha o campo de cidade!' }]}
-                        hasFeedback
-                    >
-                        <Input size="large" disabled={!isEditing} />
-                    </Form.Item>
-                </Col>
-                <Col span={12}>
-                    <Form.Item
-                        name="street"
-                        label="Rua"
-                        rules={[{ required: true, message: 'Preencha o campo de rua!' }]}
-                        hasFeedback
-                    >
-                        <Input size="large" disabled={!isEditing} />
-                    </Form.Item>
-                </Col>
-            </Row>
-            <Row align="middle" gutter={20}>
-                <Col span={12}>
-                    <Form.Item
-                        name="neighborhood"
-                        label="Bairro"
-                        rules={[{ required: true, message: 'Preencha o campo de bairro!' }]}
-                        hasFeedback
-                    >
-                        <Input size="large" disabled={!isEditing} />
-                    </Form.Item>
-                </Col>
-                <Col span={12}>
-                    <Form.Item
-                        name="number"
-                        label="Número"
-                        rules={[{ required: true, message: 'Preencha o campo de número!' }]}
-                        hasFeedback
-                    >
-                        <Input size="large" disabled={!isEditing} />
-                    </Form.Item>
-                </Col>
-            </Row>
-            <Form.Item>
-                {isEditing ? (
-                    <Row gutter={20}>
-                        <Col span={12}>
-                            <Button type="primary" htmlType="submit" block size="large">Salvar</Button>
-                        </Col>
-                        <Col span={12}>
-                            <Button block size="large" onClick={handleCancel}>Cancelar</Button>
-                        </Col>
-                    </Row>
-                ) : (
-                    <Button type="primary" block size="large" onClick={handleEdit}>Editar</Button>
-                )}
-            </Form.Item>
         </Form>
     );
 }

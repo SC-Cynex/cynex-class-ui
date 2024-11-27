@@ -1,3 +1,5 @@
+import { message } from "antd";
+
 interface AddressData {
     street: string;
     neighborhood: string;
@@ -25,7 +27,29 @@ const action = {
             console.error("Erro ao buscar endereço:", error);
             throw error;
         }
-    }
+    },
+    createUser: async (userData) => {
+        try {
+            const response = await fetch('http://localhost:8080/api/v1/auth/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(userData),
+            });
+
+            if (!response.ok) {
+                throw new Error('Erro ao criar o usuário');
+            }
+
+            message.success(`Usuário criado com sucesso`);
+            const data = await response.json();
+            return data;
+        } catch (error) {
+            console.error('Erro ao criar o usuário:', error);
+            throw error;
+        }
+    },
 };
 
 export default action;

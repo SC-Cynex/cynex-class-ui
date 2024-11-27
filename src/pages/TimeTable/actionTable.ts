@@ -1,0 +1,46 @@
+const actions = {
+    getClassUser: async () => {
+        try {
+            const user_id = localStorage.getItem('user_id');
+            const response = await fetch(`http://localhost:8080/api/v1/inscription/user?user_id=${user_id}`, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            });
+
+            if (!response.ok) {
+                throw new Error("Erro ao buscar as inscrições");
+            }
+
+            const data = await response.json();
+            return data;
+        } catch (error) {
+            console.error("Erro ao buscar as inscrições:", error);
+            throw error;
+        }
+    },
+    
+    getClass: async (value) => {
+        try {
+            const response = await fetch(`http://localhost:8080/api/v1/classes/class?class_id=${value}`, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            });
+
+            if (!response.ok) {
+                throw new Error("Erro ao buscar as inscrições");
+            }
+
+            const data = await response.json();
+            return data;
+        } catch (error) {
+            console.error("Erro ao buscar as inscrições:", error);
+            throw error;
+        }
+    },
+};
+
+export default actions;

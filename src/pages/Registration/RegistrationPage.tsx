@@ -24,7 +24,7 @@ const BreadcrumbComponent: React.FC = () => {
 const RegistrationPage: React.FC = () => {
     return (
         <DefaultFrame title="Inscrição" breadcrumb={<BreadcrumbComponent/>}>
-            <div>
+            <div style={{ marginTop: '20px' }}>
                 <CoursesGrid />
             </div>
         </DefaultFrame>

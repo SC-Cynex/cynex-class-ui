@@ -15,6 +15,7 @@ const user: MenuProps['items'] = [
             </div>
         ),
         onClick: () => {
+            localStorage.clear();
             window.location.href = '/login';
         },
     },

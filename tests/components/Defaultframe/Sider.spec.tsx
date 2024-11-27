@@ -30,7 +30,7 @@ describe('SiderPage', () => {
         expect(screen.getByText(/quadro de horários/i)).toBeInTheDocument();
         expect(screen.getByText(/inscrição/i)).toBeInTheDocument();
         expect(screen.getByText(/turmas/i)).toBeInTheDocument();
-        expect(screen.getByText(/registrar/i)).toBeInTheDocument(); // Atualizado para "Registrar Usuário"
+        expect(screen.getByText(/registrar/i)).toBeInTheDocument();
         expect(screen.getByText(/configurações/i)).toBeInTheDocument();
     });
 

@@ -3,6 +3,7 @@ import DefaultFrame from "../../components/Defaultframe/Defaultframe";
 import { Breadcrumb } from "antd";
 import { FaRegNewspaper } from "react-icons/fa6";
 import NoticeBoard from "./NoticeBoard";
+import styles from "./PortalPage.module.css";
 
 const BreadcrumbComponent: React.FC = () => {
     return (
@@ -51,7 +52,9 @@ const noticeData = [
 const NoticeBoardPage: React.FC = () => {
     return (
         <DefaultFrame title="Quadro de Avisos" breadcrumb={<BreadcrumbComponent />}>
+            <div className={styles.background}>
             <NoticeBoard notices={noticeData} />
+            </div>
         </DefaultFrame>
     );
 };
